@@ -1,41 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.example</groupId>
-    <artifactId>jreleaser-example-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
-  </parent>
+	<parent>
+		<groupId>com.example</groupId>
+		<artifactId>jreleaser-example-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
 
-  <groupId>com.example</groupId>
-  <artifactId>jrelease-example-m1</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+	<artifactId>jreleaser-example-m1</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<description>Project to test JRelaser Maven Plugin</description>
+	<inceptionYear>2022</inceptionYear>
 
-  <name>jrelease-example-m1</name>
+	<name>jreleaser-example-m1</name>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+	</properties>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jreleaser</groupId>
-        <artifactId>jreleaser-maven-plugin</artifactId>
-        <version>1.2.0</version>
-        <configuration>
-          <gitRootSearch>true</gitRootSearch>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+	<dependencies>
+		<dependency>
+			<groupId>org.jreleaser</groupId>
+			<artifactId>jreleaser-maven-plugin</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!-- https://es.quarkus.io/guides/jreleaser#adding-jreleaser -->
+				<groupId>org.jreleaser</groupId>
+				<artifactId>jreleaser-maven-plugin</artifactId>
+				<version>1.2.0</version>
+				<configuration>
+					<multiModuleProjectDirectory>${project.basedir}</multiModuleProjectDirectory>
+					<gitRootSearch>true</gitRootSearch>
+					<jreleaser>
+						<project>
+							<copyright>2022 Mariano Eloy Fernández Osca</copyright>
+						</project>
+						<environment>
+							<variables>${project.basedir}/jreleaser.properties</variables>
+						</environment>
+						<release>
+							<github>
+								<changelog>
+									<formatted>ALWAYS</formatted>
+									<preset>conventional-commits</preset>
+								</changelog>
+							</github>
+						</release>
+					</jreleaser>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
