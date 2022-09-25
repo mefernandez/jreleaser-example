@@ -71,6 +71,15 @@
 								</changelog>
 							</github>
 						</release>
+						<announce>
+							<!-- env vars:
+							JRELEASER_SLACK_TOKEN
+							JRELEASER_SLACK_WEBHOOK
+							-->
+							<slack>
+								<active>ALWAYS</active>
+							</slack>
+						</announce>
 					</jreleaser>
 				</configuration>
 			</plugin>
