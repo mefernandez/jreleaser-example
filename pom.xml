@@ -20,4 +20,17 @@
   <modules>
     <module>m1</module>
   </modules>
+
+<!--
+	Please configure your ~/.m2/settings.xml to publish to GitHub:
+	- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+	- https://github.com/settings/tokens
+-->
+<distributionManagement>
+   <repository>
+     <id>github</id>
+     <name>GitHub Apache Maven Packages</name>
+     <url>https://maven.pkg.github.com/mefernandez/jreleaser-example</url>
+   </repository>
+</distributionManagement>  
 </project>
