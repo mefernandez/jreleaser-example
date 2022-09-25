@@ -4,3 +4,4 @@
 target
 jreleaser.properties
 release.properties
+pom.xml.releaseBackup
