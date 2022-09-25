@@ -45,7 +45,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>3.0.0-M6</version>
 				<configuration>
-					<preparationGoals>jrelease:full-release</preparationGoals>
+					<preparationGoals>jreleaser:full-release</preparationGoals>
 				</configuration>
 			</plugin>
 			<plugin>
