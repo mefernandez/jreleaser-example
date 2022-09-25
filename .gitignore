@@ -3,4 +3,4 @@
 .classpath
 target
 jreleaser.properties
-
+release.properties
