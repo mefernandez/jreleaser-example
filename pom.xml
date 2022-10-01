@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>jreleaser-example-parent</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
 	<packaging>pom</packaging>
 
 	<name>jreleaser-example-parent</name>
@@ -18,7 +18,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:mefernandez/jreleaser-example.git</developerConnection>
-		<tag>jreleaser-example-parent-1.1</tag>
+		<tag>jreleaser-example-parent-1.3</tag>
 	</scm>
 	
 	<description>Project to test JRelaser Maven Plugin</description>
