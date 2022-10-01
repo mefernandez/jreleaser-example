@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>jreleaser-example-parent</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>pom</packaging>
 
 	<name>jreleaser-example-parent</name>
@@ -18,8 +18,26 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:mefernandez/jreleaser-example.git</developerConnection>
-		<tag>jreleaser-example-m1-1.0</tag>
+		<tag>jreleaser-example-parent-1.1</tag>
 	</scm>
+	
+	<description>Project to test JRelaser Maven Plugin</description>
+	<inceptionYear>2022</inceptionYear>
+	
+	<developers>
+		<developer>
+			<id>mefernandez</id>
+			<name>Mariano Eloy Fernández Osca</name>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Apache-2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<modules>
 		<module>m1</module>
