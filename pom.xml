@@ -70,7 +70,7 @@
 						</environment>
 						<release>
 							<github>
-								<releaseName>Release ${project.artifactId}} {{tagName}}</releaseName>
+								<releaseName>Release ${project.artifactId} {{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
