@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>jreleaser-example-parent</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>jreleaser-example-parent</name>
