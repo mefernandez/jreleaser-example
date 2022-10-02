@@ -5,7 +5,7 @@
 
 	<groupId>com.example</groupId>
 	<artifactId>jreleaser-example-parent</artifactId>
-	<version>1.7</version>
+	<version>1.7-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>jreleaser-example-parent</name>
@@ -18,7 +18,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:mefernandez/jreleaser-example.git</developerConnection>
-		<tag>jreleaser-example-parent-1.7</tag>
+		<tag>jreleaser-example-parent-1.1</tag>
 	</scm>
 	
 	<description>Project to test JRelaser Maven Plugin</description>
@@ -50,6 +50,9 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>3.0.0-M6</version>
 				<configuration>
+					<!--
+					<pushChanges>false</pushChanges>
+					-->
 					<preparationGoals>versions:update-child-modules jreleaser:full-release</preparationGoals>
 				</configuration>
 			</plugin>
@@ -73,7 +76,7 @@
 							<github>
 								<skipTag>true</skipTag>
 								<tagName>${project.artifactId}-${project.version}</tagName>
-								<releaseName>Release {{tagName}}</releaseName>
+								<releaseName>Release ${project.artifactId}-{{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
