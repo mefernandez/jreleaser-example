@@ -75,7 +75,7 @@
 						<release>
 							<github>
 								<skipTag>true</skipTag>
-								<tagName>${project.artifactId}-${project.version}</tagName>
+								<tagName>JReleaser Tag: ${project.artifactId}-${project.version}</tagName>
 								<releaseName>Release {{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
