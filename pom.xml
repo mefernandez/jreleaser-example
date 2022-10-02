@@ -43,9 +43,8 @@
 		<module>m1</module>
 		<module>spring-boot-demo</module>
 	</modules>
-	
+
 	<build>
-		<pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -69,7 +68,9 @@
 					<jreleaser>
 						<project>
 							<copyright>2022 Mariano Eloy Fernández Osca</copyright>
+							<!--
 							<versionPattern>CUSTOM</versionPattern>
+							-->
 						</project>
 						<environment>
 							<variables>${project.basedir}/jreleaser.properties</variables>
@@ -98,7 +99,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		</pluginManagement>
 	</build>
 
 	<profiles>
@@ -135,7 +135,6 @@
 				</plugins>
 			</build>
 		</profile>
-
 	</profiles>
 
 
