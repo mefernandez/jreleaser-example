@@ -64,6 +64,7 @@
 					<jreleaser>
 						<project>
 							<copyright>2022 Mariano Eloy Fernández Osca</copyright>
+							<versionPattern>CUSTOM</versionPattern>
 						</project>
 						<environment>
 							<variables>${project.basedir}/jreleaser.properties</variables>
@@ -71,7 +72,8 @@
 						<release>
 							<github>
 								<skipTag>true</skipTag>
-								<releaseName>Release ${project.artifactId} {{tagName}}</releaseName>
+								<tagName>${project.artifactId}-${project.version}</tagName>
+								<releaseName>Release ${project.artifactId}-{{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
