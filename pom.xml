@@ -20,10 +20,10 @@
 		<developerConnection>scm:git:git@github.com:mefernandez/jreleaser-example.git</developerConnection>
 		<tag>jreleaser-example-parent-1.1</tag>
 	</scm>
-	
+
 	<description>Project to test JRelaser Maven Plugin</description>
 	<inceptionYear>2022</inceptionYear>
-	
+
 	<developers>
 		<developer>
 			<id>mefernandez</id>
@@ -41,9 +41,11 @@
 
 	<modules>
 		<module>m1</module>
+		<module>spring-boot-demo</module>
 	</modules>
-
+	
 	<build>
+		<pluginManagement>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -96,7 +98,45 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		</pluginManagement>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<activation>
+				<file>
+					<exists>Dockerfile</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>dockerfile-maven-plugin</artifactId>
+						<version>1.4.13</version>
+						<executions>
+							<execution>
+								<id>default</id>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<repository>${project.artifactId}</repository>
+							<tag>${project.version}</tag>
+							<buildArgs>
+								<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
 
 
 	<!--
