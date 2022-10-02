@@ -76,7 +76,7 @@
 							<github>
 								<skipTag>true</skipTag>
 								<tagName>${project.artifactId}-${project.version}</tagName>
-								<releaseName>Release ${project.artifactId}-{{tagName}}</releaseName>
+								<releaseName>Release {{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
