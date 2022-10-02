@@ -50,9 +50,6 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>3.0.0-M6</version>
 				<configuration>
-					<!--
-					<pushChanges>false</pushChanges>
-					-->
 					<preparationGoals>versions:update-child-modules jreleaser:full-release</preparationGoals>
 				</configuration>
 			</plugin>
@@ -76,7 +73,7 @@
 							<github>
 								<skipTag>true</skipTag>
 								<tagName>${project.artifactId}-${project.version}</tagName>
-								<releaseName>Release ${project.artifactId}-{{tagName}}</releaseName>
+								<releaseName>Release {{tagName}}</releaseName>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
