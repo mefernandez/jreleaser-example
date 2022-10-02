@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.0.0-M5</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>spring-boot-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>spring-boot-demo</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.example</groupId>
+				<artifactId>jreleaser-example-parent</artifactId>
+				<version>1.8</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.0.0-M6</version>
+				<configuration>
+					<!--
+					<pushChanges>false</pushChanges>
+					-->
+					<preparationGoals>versions:update-child-modules jreleaser:full-release</preparationGoals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- https://es.quarkus.io/guides/jreleaser#adding-jreleaser -->
+				<groupId>org.jreleaser</groupId>
+				<artifactId>jreleaser-maven-plugin</artifactId>
+				<version>1.2.0</version>
+				<configuration>
+					<multiModuleProjectDirectory>${project.basedir}</multiModuleProjectDirectory>
+					<gitRootSearch>true</gitRootSearch>
+					<jreleaser>
+						<project>
+							<copyright>2022 Mariano Eloy Fernández Osca</copyright>
+							<!--
+							<versionPattern>CUSTOM</versionPattern>
+							-->
+						</project>
+						<environment>
+							<variables>${project.basedir}/jreleaser.properties</variables>
+						</environment>
+						<release>
+							<github>
+								<skipTag>true</skipTag>
+								<tagName>j${project.artifactId}-${project.version}</tagName>
+								<releaseName>Release {{tagName}}</releaseName>
+								<changelog>
+									<formatted>ALWAYS</formatted>
+									<preset>conventional-commits</preset>
+								</changelog>
+							</github>
+						</release>
+						<announce>
+							<!-- env vars:
+							JRELEASER_SLACK_TOKEN
+							JRELEASER_SLACK_WEBHOOK
+							-->
+							<slack>
+								<active>ALWAYS</active>
+							</slack>
+						</announce>
+					</jreleaser>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<activation>
+				<file>
+					<exists>Dockerfile</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Copy Dockerfile to target, which is Docker's context directory -->
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<!-- here the phase you need -->
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.basedir}</directory>
+											<includes>
+												<include>Dockerfile</include>
+											</includes>
+											<filtering>false</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>dockerfile-maven-plugin</artifactId>
+						<version>1.4.13</version>
+						<executions>
+							<execution>
+								<id>default</id>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<contextDirectory>target</contextDirectory>
+							<repository>${project.artifactId}</repository>
+							<tag>${project.version}</tag>
+							<buildArgs>
+								<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-milestones</id>
+			<name>Spring Milestones</name>
+			<url>https://repo.spring.io/milestone</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>
