@@ -85,6 +85,9 @@
 								<skipTag>true</skipTag>
 								<tagName>j${project.artifactId}-${project.version}</tagName>
 								<releaseName>Release {{tagName}}</releaseName>
+								<update>
+									<enabled>true</enabled>
+								</update>
 								<changelog>
 									<formatted>ALWAYS</formatted>
 									<preset>conventional-commits</preset>
