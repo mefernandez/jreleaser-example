@@ -160,7 +160,8 @@
 						</executions>
 						<configuration>
 							<contextDirectory>target</contextDirectory>
-							<repository>${project.artifactId}</repository>
+							<repository>ghcr.io/mefernandez/${project.artifactId}</repository>
+							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 							<tag>${project.version}</tag>
 							<buildArgs>
 								<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
