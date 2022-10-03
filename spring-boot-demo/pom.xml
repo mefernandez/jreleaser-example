@@ -131,6 +131,8 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
+									<repository>ghcr.io/mefernandez</repository>
+									<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 									<outputDirectory>${project.build.directory}</outputDirectory>
 									<resources>
 										<resource>
