@@ -7,6 +7,7 @@ RUN java -Djarmode=layertools -jar $JAR_FILE extract
 FROM openjdk:17-jdk-alpine3.14
 WORKDIR application
 COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-dependencies/ ./
 COPY --from=builder application/spring-boot-loader/ ./
 COPY --from=builder application/snapshot-dependencies/ ./
 COPY --from=builder application/application/ ./
