@@ -125,9 +125,17 @@
 						<version>1.4.13</version>
 						<executions>
 							<execution>
-								<id>default</id>
+								<id>build-image</id>
+								<!-- build Docker image after Spring repackage-->
+								<phase>install</phase>
 								<goals>
 									<goal>build</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>push-image</id>
+								<phase>deploy</phase>
+								<goals>
 									<goal>push</goal>
 								</goals>
 							</execution>

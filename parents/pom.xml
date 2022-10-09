@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>mmm-parents-aggregator</artifactId>
+	<version>1.2-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>mmm-parents-aggregator</name>
+
+	<modules>
+		<module>mmm-parent-with-spring-boot</module>
+		<module>mmm-parent-vanilla</module>
+	</modules>
+
+	<!--
+	Please configure your ~/.m2/settings.xml to publish to GitHub:
+	- https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
+	- https://github.com/settings/tokens
+	-->
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/mefernandez/jreleaser-example</url>
+		</repository>
+	</distributionManagement>
+</project>
