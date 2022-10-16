@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
+		<!--
+			Can't make it read parent version from property ${revision}, need to hardcode it.
+		-->
 		<version>3.0.0-M5</version>
+		<!--
+		<version>${revision}</version>
+		-->
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
-	
+
 	<groupId>com.example</groupId>
 	<artifactId>mmm-parent-with-spring-boot</artifactId>
-	<version>1.2-SNAPSHOT</version>
+	<version>${project.parent.version}-${revision}</version>
 	<packaging>pom</packaging>
-	
+
 	<properties>
 		<java.version>17</java.version>
+		<revision>SNAPSHOT</revision>
 	</properties>
 
 	<scm>
@@ -25,6 +33,31 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>flatten-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<updatePomFile>true</updatePomFile>
+					<flattenMode>resolveCiFriendliesOnly</flattenMode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>flatten</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>flatten</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>flatten.clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
@@ -56,9 +89,11 @@
 						</environment>
 						<release>
 							<github>
+								<tagName>${project.artifactId}-${project.version}</tagName>
+							<!--
 								<skipTag>true</skipTag>
-								<tagName>j${project.artifactId}-${project.version}</tagName>
 								<releaseName>Release {{tagName}}</releaseName>
+								-->
 								<update>
 									<enabled>true</enabled>
 								</update>
@@ -79,6 +114,15 @@
 						</announce>
 					</jreleaser>
 				</configuration>
+				<executions>
+					<execution>
+						<id>jreleaser-full-release</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>full-release</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
